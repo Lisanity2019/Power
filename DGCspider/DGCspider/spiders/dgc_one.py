@@ -33,6 +33,7 @@ class DgcOneSpider(scrapy.Spider):
         # 循环爬取下一页
         next_page_tmp = response.xpath(
             "//div[@id='pages']/a[last()]/@href").extract()[0]
+        if(next_page_tmp):
         # 拼接绝对路径
-        next_page_url = response.urljoin(next_page_tmp)
-        yield scrapy.Request(next_page_url, callback=self.parse)  # 默认已去重
+            next_page_url = response.urljoin(next_page_tmp)
+            yield scrapy.Request(next_page_url, callback=self.parse)  # 默认已去重
